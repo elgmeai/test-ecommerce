@@ -5,6 +5,7 @@ import 'package:test_ecommerce/core/theme/app_palette.dart';
 
 import 'all_category_screen.dart';
 import 'all_product_screen.dart';
+import 'category_screen.dart';
 
 class HomePage extends StatefulWidget {
   static route() => MaterialPageRoute(builder: (context) => HomePage());
@@ -28,11 +29,11 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height;
-    var width = MediaQuery.of(context).size.width;
+    // var height = MediaQuery.of(context).size.height;
+    // var width = MediaQuery.of(context).size.width;
     final List<Widget> widgetOptions = <Widget>[
       GetHomeScreen(),
-      allProductScreen(context, height, width),
+      OneCategoryScreen(catedoryName: '',id: 5,),
       Text('data'),
     ];
 

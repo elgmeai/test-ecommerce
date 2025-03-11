@@ -1,25 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:test_ecommerce/core/utils/error_show_snackBar.dart';
+
 import 'package:test_ecommerce/featurs/home_page/presentation/Bloc/bloc_category/categories_state.dart';
 import '../../../core/common/common_widget.dart';
 import '../../../core/theme/app_palette.dart';
 import 'Bloc/bloc_category_bi_id/category_id_bloc.dart';
 import 'Bloc/bloc_category_bi_id/category_id_event.dart';
+import 'Bloc/bloc_category_bi_id/category_id_state.dart';
 import 'widgets/common_photoWithShadow.dart';
-import 'widgets/one_category.dart';
-import 'package:test_ecommerce/featurs/home_page/presentation/Bloc/bloc_category/categories_bloc.dart';
+
+import 'widgets/one_product.dart';
 
 class OneCategoryScreen extends StatefulWidget {
   final String catedoryName;
   final int id;
-  static route(catedoryName, id) =>
-     MaterialPageRoute(
-      builder:
-          (context) => OneCategoryScreen(catedoryName: catedoryName, id: id),
-    );
-  
+  static route(catedoryName, id) => MaterialPageRoute(
+    builder: (context) => OneCategoryScreen(catedoryName: catedoryName, id: id),
+  );
 
   const OneCategoryScreen({
     super.key,
@@ -144,28 +142,36 @@ class _OneCategoryScreenState extends State<OneCategoryScreen> {
               ],
             ),
             SizedBox(height: 50),
-            BlocBuilder<CategoriesBloc, CategoriesState>(
+            BlocBuilder<CategoryByIdBloc, CategoryByIdState>(
               builder: (context, state) {
                 if (state is IsLoding) {
-                  return Text('data');
-                } else if (state is IsSuccessful) {
-                  return ListView.builder(
+                  return CircularProgressIndicator();
+                } else if (state is Downlaoded) {
+                  return GridView.builder(
+
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(childAspectRatio:0.50,
+    crossAxisCount: 2, // number of items in each row
+   // mainAxisSpacing: 200, // spacing between rows
+    crossAxisSpacing: 0, // spacing between columns
+  ),
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemCount: state.categries.length,
+                    itemCount: state.categories.length,
                     itemBuilder:
-                        (context, index) => oneCategory(
-                          5,
+                        (context, index) => oneProduct(
                           context,
-                          state.categries[index].image,
-                          state.categries[index].title,
-                          state.categries[index].description,
+                          state.categories[index].productimage[0].link,
+                          state.categories[index].title,
+                          state.categories[index].description,
+                          state.categories[index].price,
                         ),
                   );
                 }
-                return showSnackBar(context, 'Un expexted Erro');
+                return Text('');
+                
               },
-            ),
+            ),SizedBox(height: 350,),
+           
 
             Image(
               fit: BoxFit.cover,

@@ -1,13 +1,14 @@
-import '../../../data/model/categor_model.dart';
 
-abstract class CategoryByIdEvent {}
+import '../../../data/model/category_by_id.dart';
 
-class InitState extends CategoryByIdEvent {}
+abstract class CategoryByIdState {}
 
-class IsLoadingCategoryById extends CategoryByIdEvent {}
+class InitState extends CategoryByIdState {}
 
-class Dounlaoded extends CategoryByIdEvent {
-  final CategorModel categorModel;
+class IsLoadingCategoryById extends CategoryByIdState {}
 
-  Dounlaoded(this.categorModel);
+class Downlaoded extends CategoryByIdState {
+  final List< ProductModel> categories;
+
+  Downlaoded(this.categories);
 }

@@ -10,7 +10,7 @@ import '../model/categor_model.dart';
 
 abstract interface class RemoteDbGetCategories {
   Future<List<CategorModel>?> getCategories();
-  Future<List<CategoryByIdModel>?> getCategoryBiId(int id);
+  Future<List<ProductModel>?> getCategoryBiId(int id);
 }
 
 class RemoteDbGetCategoriesImp implements RemoteDbGetCategories {
@@ -31,7 +31,7 @@ class RemoteDbGetCategoriesImp implements RemoteDbGetCategories {
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 2,
         backgroundColor: const Color.fromARGB(255, 2, 2, 2),
-        textColor: Colors.white,
+        textColor: Color.fromARGB(255, 255, 255, 255),
         fontSize: 16.0,
       );
     }
@@ -39,25 +39,26 @@ class RemoteDbGetCategoriesImp implements RemoteDbGetCategories {
   }
 
   @override
-  Future<List<CategoryByIdModel>?> getCategoryBiId(int id) async {
-    List<CategoryByIdModel> categoryById = [];
+  Future<List<ProductModel>?> getCategoryBiId(int id) async {
+    List<ProductModel> categoryById = [];
     try {
-      var response = await http.get(Apis.getCategory(id));
+      var response = await http.get(Apis.getProductByCategory({'category_id':'$id','page':'1'}));
 
       List category = jsonDecode(response.body)['data'];
-      List<CategoryByIdModel> finalList =
-          category.map((e) => CategoryByIdModel.fromJson(e)).toList();
+      List<ProductModel> finalList =
+          category.map((e) => ProductModel.fromJson(e)).toList();
 
       categoryById = finalList;
       return categoryById;
     } catch (e) {
+      print('=========================');
       Fluttertoast.showToast(
         msg: e.toString(),
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 2,
         backgroundColor: const Color.fromARGB(255, 2, 2, 2),
-        textColor: Colors.white,
+        textColor: Color.fromARGB(255, 255, 255, 255),
         fontSize: 16.0,
       );
     }

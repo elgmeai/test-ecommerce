@@ -19,7 +19,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPreferancesThem.init();
 
-  String theme = 'dark';
+  String theme = await SharedPreferancesThem.getTheme();
   runApp(App(themeFromDB: theme));
 }
 

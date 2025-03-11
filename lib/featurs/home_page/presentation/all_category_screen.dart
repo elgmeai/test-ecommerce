@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:test_ecommerce/core/utils/error_show_snackBar.dart';
+
 import 'package:test_ecommerce/featurs/home_page/presentation/Bloc/bloc_category/categories_state.dart';
 import '../../../core/common/common_widget.dart';
 import '../../../core/theme/app_palette.dart';
@@ -140,7 +140,7 @@ class _GetHomeScreenState extends State<GetHomeScreen> {
             BlocBuilder<CategoriesBloc, CategoriesState>(
               builder: (context, state) {
                 if (state is IsLoding) {
-                  return Text('data');
+                  return CircularProgressIndicator();
                 } else if (state is IsSuccessful) {
                   return ListView.builder(
                     physics: NeverScrollableScrollPhysics(),
@@ -156,7 +156,7 @@ class _GetHomeScreenState extends State<GetHomeScreen> {
                         ),
                   );
                 }
-                return showSnackBar(context, 'Un expexted Erro');
+                return Text('data');
               },
             ),
 

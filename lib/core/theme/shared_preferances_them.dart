@@ -7,13 +7,14 @@ class SharedPreferancesThem {
     prefs = await SharedPreferences.getInstance();
   }
 
-  static getTheme() async {
+  static Future<String> getTheme() async {
+    String theme = 'light';
     // final SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? theme = prefs.getString('themekey');
-    if (theme==null) {
-      theme =='light';
+    String? themeFromDb = prefs.getString('themekey');
+    if (themeFromDb != null) {
+      theme = themeFromDb;
     }
-    
+
     return theme;
   }
 

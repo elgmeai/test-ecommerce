@@ -8,11 +8,12 @@ class Apis {
   static Uri authLogout = Uri.https(baseUrl, 'api/out');
   //category
   static Uri getCategories = Uri.https(baseUrl, 'api/category/get');
-  static Uri getCategory (int id)=> Uri.https(baseUrl, 'api/category/find/$id');
+  //static Uri getCategory (int id)=> Uri.https(baseUrl, 'api/category/find/$id');
   //product
-  static Uri getProductByCategory = Uri.https(
+  static Uri getProductByCategory(Map<String, dynamic> quiryParams)  => Uri.https(
     baseUrl,
-    'api/product/category?category_id=1&page=1',
+    'api/product/category',
+    quiryParams
   );
   static Uri getProductDetails = Uri.https(baseUrl, 'api/product/find/3');
   //cart
